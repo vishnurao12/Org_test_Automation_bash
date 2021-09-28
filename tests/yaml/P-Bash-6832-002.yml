@@ -1,0 +1,23 @@
+resources:
+  - name: P_Bash_6832_002_Property_Bag
+    type: PropertyBag
+    configuration:
+      value: value
+      pinVersion: 0
+
+pipelines:
+  - name: P_Bash_6832_002
+    configuration:
+      environmentVariables:
+        readOnly:
+          resource_set: 1
+          resource_check: 1
+    steps:
+      - name: P_Bash_6832_002_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: P_Bash_6832_002_Property_Bag
+        execution:
+          onExecute:
+            - echo $res_P_Bash_6832_002_Property_Bag_value
