@@ -18,31 +18,24 @@ pipelines:
   - name: S_GoPublishModule_6679_001
     steps:
       - name: S_GoPublishModule_6679_001_1
-        type: GoBuild
+        type: GoPublishModule
         configuration:
           sourceLocation: "tests/Go/HelloWorld"
-          resolverRepo: test-automation-go-virtual
-          integrations:
-            - name: s_artifactory
-          inputResources:
-            - name: S_GoPublishModule_6679_001_GitRepo
-      - name: S_GoPublishModule_6679_001_2
-        type: GoPublishBinary
-        configuration:
+          version: "v0.0.${run_number}"
           autoPublishBuildInfo: true
           forceXrayScan: true
-          inputSteps:
-            - name: S_GoPublishModule_6679_001_1
+          inputResources:
+            - name: S_GoPublishModule_6679_001_GitRepo
           targetRepository: test-automation-go-local
           outputResources:
             - name: S_GoPublishModule_6679_001_buildInfo
-      - name: S_GoPublishModule_6679_001_3
+      - name: S_GoPublishModule_6679_001_2
         type: Bash
         configuration:
           inputResources:
             - name: S_GoPublishModule_6679_001_buildInfo
           inputSteps:
-            - name: S_GoPublishModule_6679_001_2
+            - name: S_GoPublishModule_6679_001_1
           integrations:
             - name: s_artifactory
         execution:
