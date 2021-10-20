@@ -3,7 +3,8 @@ resources:
     type: PropertyBag
     configuration:
       value: value
-      pinVersion: {{pinVersion}}
+      pin:
+       versionId: {{pinVersion}}
 
 pipelines:
   - name: P_Bash_6832_001
