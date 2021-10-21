@@ -28,6 +28,10 @@ pipelines:
             - name: S_DockerPush_6679_001_GitRepo
           integrations:
             - name: s_artifactory
+          onExecute:
+            - artifactory_registry_url=$(echo "$int_s_artifactory_url" | sed 's#.*//\([^/]*\)/.*#\1#')
+            - add_run_variables artifactory_registry_url="$artifactory_registry_url"
+
       - name: S_DockerPush_6679_001_2
         type: DockerPush
         configuration:
