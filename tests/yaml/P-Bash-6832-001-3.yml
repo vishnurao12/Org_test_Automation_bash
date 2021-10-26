@@ -1,0 +1,34 @@
+resources:
+  - name: P_Bash_6832_001_Property_Bag
+    type: PropertyBag
+    configuration:
+      value: value
+      pin:
+       versionId: {{pinVersion}}
+
+pipelines:
+  - name: P_Bash_6832_001
+    configuration:
+      environmentVariables:
+        readOnly:
+          resource_set: 2
+          resource_check: 1
+    steps:
+      - name: P_Bash_6832_001_1
+        type: Bash
+        configuration:
+          outputResources:
+            - name: P_Bash_6832_001_Property_Bag
+        execution:
+          onExecute:
+            - write_output P_Bash_6832_001_Property_Bag value=$resource_set
+
+      - name: P_Bash_6832_001_2
+        type: Bash
+        configuration:
+          inputResources:
+            - name: P_Bash_6832_001_Property_Bag
+        execution:
+          onExecute:
+            - echo $res_P_Bash_6832_001_Property_Bag_value
+            - if [ "$res_P_Bash_6832_001_Property_Bag_value" != "$resource_check" ]; then exit 1; fi
