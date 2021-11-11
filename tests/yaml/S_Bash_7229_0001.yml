@@ -9,8 +9,6 @@ pipelines:
       - name: S_Bash_7229_0001_1
         type: Bash
         configuration:
-          priority: 10
-          chronological: true
           outputResources:
             - name: S_Bash_7229_0001_resource
         execution:
@@ -18,28 +16,16 @@ pipelines:
             - echo "${run_id}"
             - add_run_variables run_key="${run_id}"
             - write_output S_Bash_7229_0001_resource test=${run_id}
-            - sleep 5
           onExecute:
             - echo 'step 1'
       - name: S_Bash_7229_0001_2
         type: Bash
         configuration:
-          inputSteps:
-            - name: S_Bash_7229_0001_1
-        execution:
-          onExecute:
-            - sleep 1800
-      - name: S_Bash_7229_0001_3
-        type: Bash
-        configuration:
           inputResources:
             - name: S_Bash_7229_0001_resource
-          inputSteps:
-            - name: S_Bash_7229_0001_2
-              status:
-                - cancelled
-                - error
+          requiresApproval:
+            timeoutSeconds: 3600
         execution:
           onExecute:
-            - echo 'step 3'
+            - echo 'step 2'
             - echo "run variable is ${run_key}"
