@@ -1,12 +1,10 @@
 pipelines:
-  - name: S_B_Jen_0044
+  - name: S_B_Jen_6776_009
     steps:
-      - name: S_B_Jen_0044_1
+      - name: S_B_Jen_6776_009
         type: Jenkins
         configuration:
-          timeoutSeconds: 2
-          jenkinsJobName: testFolder/multibranch
-          jenkinsBranchName: {{gitBranch}}
+          jenkinsJobName: testFolder/singlebranch
           buildParameters:
             waitTime: 120
           integrations:
