@@ -1,0 +1,35 @@
+resources:
+  - name: S_BASH_7261_0002_resource
+    type: VmCluster
+    configuration:
+      sshKey: s_BASH_7261_SSHKEY
+      targets:
+        - 0.0.0.0
+
+pipelines:
+  - name: S_BASH_7261_0002
+    steps:
+      - name: S_BASH_7261_0002_1
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          affinityGroup: S_BASH_7261_0002
+        execution:
+          onExecute:
+            - echo hello
+            - rm -rf ~/.ssh || true
+      - name: S_BASH_7261_0002_2
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          affinityGroup: S_BASH_7261_0002
+          inputSteps:
+            - name: S_BASH_7261_0002_1
+          inputResources:
+            - name: S_BASH_7261_0002_resource
+        execution:
+          onExecute:
+            - ls ~/.ssh
+            - echo "noop"
