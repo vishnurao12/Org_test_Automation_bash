@@ -1,0 +1,13 @@
+pipelines:
+  - name: S_Bash_Generic_685_0001
+    steps:
+      - name: S_Bash_Generic_685_0001_1
+        type: Bash
+        configuration:
+          integrations:
+            - name: s_gitHub
+        execution:
+          onExecute:
+            - printenv
+            - echo $int_s_gitHub_token
+
