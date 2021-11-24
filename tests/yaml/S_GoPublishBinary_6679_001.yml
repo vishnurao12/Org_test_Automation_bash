@@ -19,7 +19,13 @@ pipelines:
     steps:
       - name: S_GoPublishBinary_6679_001_1
         type: GoBuild
+        execution:
+          onStart:
+            - add_run_variables buildName=${JFROG_CLI_BUILD_NAME} buildNumber=${JFROG_CLI_BUILD_NUMBER}
         configuration:
+          affinityGroup: S_GoPublishBinary_6679_001
+          environmentVariables:
+              JFROG_CLI_BUILD_NUMBER: ${run_id}
           sourceLocation: "tests/Go/HelloWorld"
           resolverRepo: test-automation-go-virtual
           integrations:
@@ -28,7 +34,13 @@ pipelines:
             - name: S_GoPublishBinary_6679_001_GitRepo
       - name: S_GoPublishBinary_6679_001_2
         type: GoPublishBinary
+        execution:
+          onStart:
+            - add_run_variables buildName=${JFROG_CLI_BUILD_NAME} buildNumber=${JFROG_CLI_BUILD_NUMBER}
         configuration:
+          affinityGroup: S_GoPublishBinary_6679_001
+          environmentVariables:
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
           integrations:
             - name: s_artifactory
           autoPublishBuildInfo: true

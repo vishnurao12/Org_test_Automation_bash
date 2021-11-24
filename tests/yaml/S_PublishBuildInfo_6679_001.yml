@@ -10,6 +10,9 @@ pipelines:
       - name: S_PublishBuildInfo_6679_001_1
         type: Bash
         configuration:
+          affinityGroup: S_PublishBuildInfo_6679_001
+          environmentVariables:
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
           integrations:
             - name: s_artifactory
         execution:
@@ -21,6 +24,7 @@ pipelines:
       - name: S_PublishBuildInfo_6679_001_2
         type: PublishBuildInfo
         configuration:
+          affinityGroup: S_PublishBuildInfo_6679_001
           forceXrayScan: true
           outputResources:
             - name: S_PublishBuildInfo_6679_001_output
