@@ -20,6 +20,8 @@ pipelines:
       - name: S_NpmPublish_6679_001_1
         type: NpmBuild
         configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
           affinityGroup: S_NpmPublish_6679_001
           sourceLocation: "tests/npm"
           resolverRepo: "test-automation-npm-remote"
@@ -29,6 +31,9 @@ pipelines:
             - name: S_NpmPublish_6679_001_GitRepo
       - name: S_NpmPublish_6679_001_2
         type: NpmPublish
+        execution:
+          onStart:
+            - add_run_variables buildName=${JFROG_CLI_BUILD_NAME} buildNumber=${JFROG_CLI_BUILD_NUMBER}
         configuration:
           affinityGroup: S_NpmPublish_6679_001
           autoPublishBuildInfo: true

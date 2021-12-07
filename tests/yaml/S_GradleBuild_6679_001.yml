@@ -19,6 +19,8 @@ pipelines:
       - name: S_GradleBuild_6679_001_1
         type: GradleBuild
         configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
           sourceLocation: "tests/gradle"
           autoPublishBuildInfo: true
           gradleCommand: "hello"
