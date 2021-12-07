@@ -20,6 +20,8 @@ pipelines:
       - name: S_GoPublishModule_6679_001_1
         type: GoPublishModule
         configuration:
+          environmentVariables:
+            JFROG_CLI_BUILD_NUMBER: ${run_id}
           sourceLocation: "tests/Go/HelloWorld"
           version: "v0.0.${run_number}"
           autoPublishBuildInfo: true
