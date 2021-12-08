@@ -5,4 +5,7 @@ pipelines:
         type: Bash
         execution:
           onExecute:
-            - for i in $(seq 0 100); do add_run_variables var${i}="ThisIsLongVariable${i}"; done
+            - longVariable=""
+            - for i in $(seq 0 10); do longVariable+="abcdefghijklmnopqrstuvwxyz"; done
+            - echo "$longVariable"
+            - for i in $(seq 0 5000); do add_run_variables var${i}="${longVariable}${i}"; done
