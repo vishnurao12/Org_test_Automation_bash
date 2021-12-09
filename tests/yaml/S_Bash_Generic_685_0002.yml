@@ -1,0 +1,25 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: S_Bash_Generic_685_0002_repo
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
+      branches:
+        include: master
+
+pipelines:
+  - name: S_Bash_Generic_685_0002
+    steps:
+      - name: S_Bash_Generic_685_0002_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: S_Bash_Generic_685_0002_repo
+        execution:
+          onExecute:
+            - printenv
+            - echo $res_S_Bash_Generic_685_0002_repo_gitProvider_token
+

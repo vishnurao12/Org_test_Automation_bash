@@ -7,6 +7,16 @@ pipelines:
           onStart:
             - echo "Starting"
           onExecute:
+            # Add multiple commands to force console buffer to be flushed
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
+            - echo "Running"
             - echo "Running"
             - sleep 300
           onComplete:
