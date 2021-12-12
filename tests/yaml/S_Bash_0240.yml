@@ -10,4 +10,4 @@ pipelines:
         execution:
           onExecute:
             - echo "executing step..."
-            - aws s3 ls
+            - aws sts get-caller-identity
