@@ -58,7 +58,7 @@ pipelines:
         execution:
           onExecute:
             # create an invalid signature file
-            - export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_LX_CreateReleaseBundle_5949_0001/{{gitBranch}}/${run_number}/s-S_LX_CreateReleaseBundle_5949_0001_2.json.sig | jq '.[0].path')
+            - export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_LX_CreateReleaseBundle_5949_0001/{{gitBranch}}/${run_number}/s-S_LX_CreateReleaseBundle_5949_0001_1.json.sig | jq '.[0].path')
             - execute_command "jfrog rt u $res_S_LX_CreateReleaseBundle_5949_0001_GitRepo_resourcePath/tests/artifacts/invalidGPGSig $head_sig_path --quiet"
       - name: S_LX_CreateReleaseBundle_5949_0001_4
         type: CreateReleaseBundle
