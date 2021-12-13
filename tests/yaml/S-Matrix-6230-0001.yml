@@ -15,8 +15,6 @@ pipelines:
     steps:
       - name: normalStep
         type: Bash
-        configuration:
-          nodePool: Automation_AWS_S-Matrix-6230-0001
         execution:
           onExecute:
             - echo "Normal Step"
@@ -25,7 +23,6 @@ pipelines:
       - name: matrixStep
         type: Matrix
         configuration:
-          nodePool: Automation_AWS_S-Matrix-6230-0001
           multiNode: true
           runtime:
             type: host
