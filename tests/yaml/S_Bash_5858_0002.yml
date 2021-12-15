@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ../values/gitRepoValues.yml
 
 resources:
-  - name: repo
+  - name: S_Bash_0578
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
@@ -15,7 +15,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_0578
         execution:
           onExecute:
             - echo "executing S_Bash_0578_A_1"
