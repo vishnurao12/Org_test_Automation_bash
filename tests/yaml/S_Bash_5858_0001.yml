@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ../values/gitRepoValues.yml
 
 resources:
-  - name: repo
+  - name: S_Bash_Generic_5858
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
@@ -15,7 +15,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0001"
@@ -38,7 +38,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0003"
@@ -62,7 +62,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0005"
@@ -84,7 +84,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0007"
@@ -107,7 +107,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0009"
@@ -130,7 +130,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0011"
@@ -153,7 +153,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0013"
@@ -176,7 +176,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0015"
@@ -198,7 +198,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0017"
@@ -220,7 +220,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0019"
@@ -242,7 +242,7 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo
+            - name: S_Bash_Generic_5858
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0019"

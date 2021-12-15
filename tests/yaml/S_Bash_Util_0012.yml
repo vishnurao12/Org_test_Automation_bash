@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ../values/gitRepoValues.yml
 
 resources:
-  - name: repo_pipe
+  - name: S_Bash_Util_0012
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
@@ -15,11 +15,11 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo_pipe
+            - name: S_Bash_Util_0012
 
         execution:
           onExecute:
-            - pushd $res_repo_pipe_resourcePath
+            - pushd $res_S_Bash_Util_0012_resourcePath
             - mkdir savetests
             - pushd savetests
             - pwd
@@ -32,5 +32,5 @@ pipelines:
             - hash -d pip
             - pip install pytest
             - py.test --verbose --junit-xml test-reports/results.xml tests/core/sampleExecutionFile/test_calc.py
-            - save_tests $res_repo_pipe_resourcePath/savetests/test.xml
+            - save_tests $res_S_Bash_Util_0012_resourcePath/savetests/test.xml
             - popd

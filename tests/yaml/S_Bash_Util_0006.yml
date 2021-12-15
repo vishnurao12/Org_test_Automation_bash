@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ../values/gitRepoValues.yml
 
 resources:
-  - name: repo_pipe
+  - name: S_Bash_Util_0006
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
@@ -15,11 +15,11 @@ pipelines:
         type: Bash
         configuration:
           inputResources:
-            - name: repo_pipe
+            - name: S_Bash_Util_0006
 
         execution:
           onExecute:
-            - echo "image resource path is $res_repo_pipe_resourcePath"
+            - echo "image resource path is $res_S_Bash_Util_0006_resourcePath"
             - touch file.txt
             - echo "Hello frog" >> file.txt
             - add_pipeline_files file.txt jfrog_pipeline
@@ -29,7 +29,7 @@ pipelines:
         configuration:
           nodePool: win_2019
           inputResources:
-            - name: repo_pipe
+            - name: S_Bash_Util_0006
           inputSteps:
             - name:  S_Bash_Util_0006
 

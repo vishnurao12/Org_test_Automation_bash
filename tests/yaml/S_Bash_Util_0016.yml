@@ -2,7 +2,7 @@ template: true
 valuesFilePath: ../values/gitRepoValues.yml
 
 resources:
-  - name: repo_pipe
+  - name: S_Bash_Util_0016
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
@@ -16,7 +16,7 @@ pipelines:
         type: Matrix
         configuration:
           inputResources:
-            - name: repo_pipe
+            - name: S_Bash_Util_0016
         stepMode: Bash
         stepletMultipliers:
           environmentVariables:
