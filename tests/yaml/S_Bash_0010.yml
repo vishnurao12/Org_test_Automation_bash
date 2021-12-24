@@ -8,4 +8,4 @@ pipelines:
             - echo "executing step..."
             - echo $step_node_pool_name
             - |
-              if [ [ $step_node_pool_name == "u16dynamic" || $step_node_pool_name == "u18dynamic" || $step_node_pool_name == "u20dynamic" || $step_node_pool_name == "c7dynamic" || $step_node_pool_name == "c8dynamic" ] ];then return 0; fi
+              if [ [ $step_node_pool_name == "u18dynamic" || $step_node_pool_name == "u20dynamic" || $step_node_pool_name == "c7dynamic" || $step_node_pool_name == "c8dynamic" ] ];then return 0; fi
