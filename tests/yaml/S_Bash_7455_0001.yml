@@ -1,0 +1,92 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: S_Bash_7455_0001_GitRepo
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+
+pipelines:
+  - name: pipelines_S_Bash_7455_0001
+    steps:
+      - name: S_Bash_7455_0001
+        type: Bash
+        configuration:
+          inputResources:
+            - name: S_Bash_7455_0001_GitRepo
+        execution:
+          onExecute:
+            - printenv
+            - echo "executing step..."
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_lastAuthorEmail" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitProvider_token" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isGitTag" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_commitUrl" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_shaData" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitProvider_id" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_integrationName" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_operation" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitRepoFullName" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitProvider_name" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitProvider_url" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitRepoSourceDefaultBranch" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isTrigger" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_resourceId" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitProvider_masterName" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_commitSha" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isPullRequest" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_path" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isPrivateRepository" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isPrerelease" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitRepoRepositorySshUrl" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isRelease" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_integrationAlias" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_branchName" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_resourcePath" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_compareUrl" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_repositoryProvider" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_sysPrivateDeployKey" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_sysPublicDeployKey" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_beforeCommitSha" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitRepoRepositoryHttpsUrl" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_isPullRequestClose" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_gitRepoRepositoryUrl" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_masterName" ]
+            - |
+              [ ! -z "$res_S_Bash_7455_0001_GitRepo_commitMessage" ]
