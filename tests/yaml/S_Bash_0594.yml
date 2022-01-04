@@ -5,7 +5,7 @@
         type: Bash
         configuration:
           integrations:
-            - name: i_pagerduty
+            - name: s_pagerduty
         execution:
           onExecute:
-            - send_notification i_pagerduty "adding some text without argument flag"
+            - send_notification s_pagerduty "adding some text without argument flag"
