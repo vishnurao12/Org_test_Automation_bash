@@ -5,7 +5,7 @@
         type: Bash
         configuration:
           integrations:
-            - name: i_pagerduty
+            - name: s_pagerduty
         execution:
           onExecute:
-            - send_notification i_pagerduty -text "hello world from bash run number $run_number"
+            - send_notification s_pagerduty -text "hello world from bash run number $run_number"

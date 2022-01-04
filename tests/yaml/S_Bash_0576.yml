@@ -5,13 +5,13 @@ pipelines:
         type: Bash
         configuration:
           integrations:
-            - name: i_pagerduty
+            - name: BSI_pagerduty
         execution:
           onExecute:
             - echo "executing step..."
             - |
-              [ ! -z "$int_i_pagerduty_masterName"  ]
+              [ ! -z "$int_BSI_pagerduty_masterName"  ]
             - |
-              [ ! -z "$int_i_pagerduty_id"  ]
+              [ ! -z "$int_BSI_pagerduty_id"  ]
             - |
-              [ ! -z "$int_i_pagerduty_token"  ]
+              [ ! -z "$int_BSI_pagerduty_token"  ]

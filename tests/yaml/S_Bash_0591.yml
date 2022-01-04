@@ -5,7 +5,7 @@
         type: Bash
         configuration:
           integrations:
-            - name: i_pagerduty
+            - name: BSI_pagerduty
         execution:
           onExecute:
-            - send_notification i_pagerduty
+            - send_notification BSI_pagerduty
