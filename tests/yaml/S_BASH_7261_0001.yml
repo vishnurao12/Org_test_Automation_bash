@@ -1,0 +1,27 @@
+pipelines:
+  - name: S_BASH_7261_0001
+    steps:
+      - name: S_BASH_7261_0001_1
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          affinityGroup: S_BASH_7261_0001
+        execution:
+          onExecute:
+            - echo hello
+            - rm -rf ~/.ssh || true
+      - name: S_BASH_7261_0001_2
+        type: Bash
+        configuration:
+          runtime:
+            type: host
+          affinityGroup: S_BASH_7261_0001
+          inputSteps:
+            - name: S_BASH_7261_0001_1
+          integrations:
+            - name: s_BASH_7261_SSHKEY
+        execution:
+          onExecute:
+            - ls ~/.ssh
+            - echo "noop"
