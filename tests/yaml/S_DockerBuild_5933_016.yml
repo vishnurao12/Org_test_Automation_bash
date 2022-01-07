@@ -24,11 +24,12 @@ pipelines:
         configuration:
           integrations:
             - name: s_artifactory
+            - name: s_rt_dockerRegistry
           outputResources:
             - name: S_DockerBuild_5933_016_FileSpec
         execution:
           onExecute:
-            - echo "FROM hello-world" > Dockerfile
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
             - jfrog rt upload Dockerfile test-automation-generic-local/DockerBuild_5933_016_Dockerfile
 
   - name: pipeline_S_DockerBuild_5933_016_2
