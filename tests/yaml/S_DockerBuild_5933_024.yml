@@ -23,11 +23,12 @@ pipelines:
             - name: S_DockerBuild_5933_024_GitRepo
           integrations:
             - name: s_artifactory
+            - name: s_rt_dockerRegistry
         execution:
           onStart:
             - artifactory_registry_url=$(echo "$int_s_artifactory_url" | sed 's#.*//\([^/]*\)/.*#\1#')
             - cd $res_S_DockerBuild_5933_024_GitRepo_resourcePath
-            - echo "FROM hello-world" > Dockerfile
+            - echo "FROM $artifactory_registry_url/test-automation-docker-remote/hello-world" > Dockerfile
       - name: S_DockerBuild_5933_024_2
         type: Bash
         configuration:
