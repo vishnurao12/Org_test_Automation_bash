@@ -31,6 +31,7 @@ pipelines:
             - name: S_HelmDeploy_5933_014_FileSpec
         execution:
           onExecute:
+            - jfrog rt upload ${res_S_HelmDeploy_5933_014_GitRepo_resourcePath}/tests/core/helmdeploy/simplehelm-0.3.0.tgz "test-automation-helm-local/S_HelmDeploy_5933_014/simplehelm-0.3.0.tgz"
             - write_output S_HelmDeploy_5933_014_FileSpec recursive=true
 
   - name: pipeline_S_HelmDeploy_5933_014_2
