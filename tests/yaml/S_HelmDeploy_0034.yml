@@ -45,18 +45,12 @@ pipelines:
             - name: S_HelmDeploy_ReleaseBundle_0034_BuildInfo
         execution:
           onExecute:
-            - request='{"key":"simplecharts", "rclass":"local", "packageType":"helm", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete simplecharts --quiet || true
-            - jfrog rt repo-create request.json
             - cd ${res_S_HelmDeploy_ReleaseBundle_0034_GitRepo_resourcePath}/tests/core/helmdeploy
             - jfrog rt u index.yaml simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt u simplehelm-0.3.0.tgz simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_HelmDeploy_ReleaseBundle_0034_BuildInfo buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
-          onFailure:
-            - jfrog rt repo-delete simplecharts --quiet
 
       - name: S_HelmDeploy_0034_create_release_bundle
         type: CreateReleaseBundle
@@ -101,6 +95,5 @@ pipelines:
             - if [ $status -gt 299 ]; then return 1; fi
             - if [ $status -eq 204 ]; then echo "Deleted release bundle $releaseBundleName/$releaseBundleVersion successfully"; fi
             - echo "Deleting artifactory repository..."
-            - jfrog rt repo-delete simplecharts --quiet || true
             - echo "Deleting helm resources..."
             - helm3 delete simplehelm-from-repo-$run_id --namespace $K8S_NAMESPACE

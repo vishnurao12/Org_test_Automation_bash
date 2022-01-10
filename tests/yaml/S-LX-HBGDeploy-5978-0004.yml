@@ -42,18 +42,12 @@ pipelines:
             - name: S_LX_HBGDeploy_5978_0004_helm_resource
         execution:
           onExecute:
-            - request='{"key":"simplecharts", "rclass":"local", "packageType":"helm", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete simplecharts --quiet || true
-            - jfrog rt repo-create request.json
             - cd ${res_S_LX_HBGDeploy_5978_0004_git_resource_resourcePath}/tests/core/helmbluegreen
             - jfrog rt u index.yaml simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt u simplehelm-0.3.0.tgz simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_LX_HBGDeploy_5978_0004_helm_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
-          onFailure:
-            - jfrog rt repo-delete simplecharts --quiet
 
       - name: S_LX_HBGDeploy_5978_0004_2
         type: HelmBlueGreenDeploy
@@ -81,6 +75,5 @@ pipelines:
             - helm3 status ${blue_release_name}
             - kubectl get service ${idle_name}
           onComplete:
-            - jfrog rt repo-delete simplecharts --quiet || true
             - helm3 delete ${blue_release_name} --namespace ${k8s_namespace} || true
             - kubectl delete service ${idle_name} --namespace ${k8s_namespace} || true
