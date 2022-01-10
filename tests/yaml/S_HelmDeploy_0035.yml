@@ -45,6 +45,7 @@ pipelines:
             - name: S_HelmDeploy_0035_BuildInfo_resource
         execution:
           onExecute:
+            - jfrog rt u ${res_S_HelmDeploy_0035_GitRepo_resource_resourcePath}/tests/core/helmdeploy/simplehelm-0.3.0.tgz "helmgeneric/" --explode
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_HelmDeploy_0035_BuildInfo_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER

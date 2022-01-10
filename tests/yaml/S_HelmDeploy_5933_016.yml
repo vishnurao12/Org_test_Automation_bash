@@ -43,6 +43,8 @@ pipelines:
         execution:
           onExecute:
             - cd ${res_S_HelmDeploy_5933_016_GitRepo_resourcePath}/tests/core/helmdeploy
+            - jfrog rt upload index.yaml test-automation-helm-local/S_HelmDeploy_5933_016/index.yaml --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
+            - jfrog rt upload simplehelm-0.3.0.tgz test-automation-helm-local/S_HelmDeploy_5933_016/simplehelm-0.3.0.tgz --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt build-collect-env $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt build-publish $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_HelmDeploy_5933_016_BuildInfo buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER

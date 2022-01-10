@@ -43,6 +43,8 @@ pipelines:
         execution:
           onExecute:
             - cd ${res_S_LX_HBGDeploy_5978_0004_git_resource_resourcePath}/tests/core/helmbluegreen
+            - jfrog rt u index.yaml simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
+            - jfrog rt u simplehelm-0.3.0.tgz simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_LX_HBGDeploy_5978_0004_helm_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
