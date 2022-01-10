@@ -38,13 +38,7 @@ pipelines:
               trigger: false
         execution:
           onExecute:
-            - request='{"key":"helmgeneric", "rclass":"local", "packageType":"generic", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete helmgeneric --quiet || true
-            - jfrog rt repo-create request.json
-            - jfrog rt u ${res_S_HelmDeploy_GitRepo_0015_resource_resourcePath}/tests/core/helmdeploy/simplehelm-0.3.0.tgz "helmgeneric/" --explode
-          onFailure:
-            - jfrog rt repo-delete helmgeneric --quiet
+            - echo 'bash step..'
 
       - name: deploy_helm_chart_generic
         type: HelmDeploy
@@ -67,5 +61,4 @@ pipelines:
           test: true
         execution:
           onComplete:
-            - jfrog rt repo-delete helmgeneric --quiet || true
             - helm3 delete ${release_name_generic} --namespace ${k8s_namespace}

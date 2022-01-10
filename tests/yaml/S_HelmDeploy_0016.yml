@@ -37,8 +37,7 @@ pipelines:
               trigger: false
         execution:
           onExecute:
-            - jfrog rt u ${res_S_HelmDeploy_GitRepo_0016_resource_resourcePath}/tests/core/helmdeploy/simplehelm-0.3.0.tgz "simplecharts/"
-            - jfrog rt u ${res_S_HelmDeploy_GitRepo_0016_resource_resourcePath}/tests/core/helmdeploy/index.yaml "simplecharts/"
+            - echo 'bash step'
 
       - name: deploy_helm_chart_from_helm_repo
         type: HelmDeploy

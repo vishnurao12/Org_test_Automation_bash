@@ -46,8 +46,6 @@ pipelines:
           test: true
         execution:
           onComplete:
-            - echo "Deleting artifactory repository..."
-            - jfrog rt repo-delete helmgeneric --quiet || true
             - echo "Deleting helm resources..."
             - helm3 delete simplehelm-generic-$run_id --namespace $K8S_NAMESPACE
 
