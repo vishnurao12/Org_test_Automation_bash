@@ -39,8 +39,7 @@ pipelines:
               trigger: false
         execution:
           onExecute:
-            - jfrog rt u ${res_S_LX_HBGDeploy_5978_0003_git_resource_resourcePath}/tests/core/helmbluegreen/simplehelm-0.3.0.tgz "simplecharts/"
-            - jfrog rt u ${res_S_LX_HBGDeploy_5978_0003_git_resource_resourcePath}/tests/core/helmbluegreen/index.yaml "simplecharts/"
+            - echo 'bash step ..'
 
       - name: S_LX_HBGDeploy_5978_0003_2
         type: HelmBlueGreenDeploy

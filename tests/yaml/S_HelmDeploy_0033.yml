@@ -45,16 +45,9 @@ pipelines:
             - name: S_HelmDeploy_0033_BuildInfo_resource
         execution:
           onExecute:
-            - request='{"key":"helmgeneric", "rclass":"local", "packageType":"generic", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete helmgeneric || true
-            - jfrog rt repo-create request.json
-            - jfrog rt u ${res_S_HelmDeploy_0033_GitRepo_resource_resourcePath}/tests/core/helmdeploy/simplehelm-0.3.0.tgz "helmgeneric/" --explode
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_HelmDeploy_0033_BuildInfo_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
-          onFailure:
-            - jfrog rt repo-delete helmgeneric
 
       - name: S_HelmDeploy_0033_create_release_bundle
         type: CreateReleaseBundle
@@ -96,7 +89,5 @@ pipelines:
             - "status=$(curl $curlOptions -XDELETE \"$distributionUrl/api/v1/release_bundle/$releaseBundleName/$releaseBundleVersion\")"
             - if [ $status -gt 299 ]; then return 1; fi
             - if [ $status -eq 204 ]; then echo "Deleted release bundle $releaseBundleName/$releaseBundleVersion successfully"; fi
-            - echo "Deleting artifactory repository..."
-            - jfrog rt repo-delete helmgeneric --quiet || true
             - echo "Deleting helm resources..."
             - helm3 delete simplehelm-generic-$run_id --namespace $K8S_NAMESPACE

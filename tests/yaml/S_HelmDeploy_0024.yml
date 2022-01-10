@@ -38,17 +38,11 @@ pipelines:
             - name: S_HelmDeploy_BuildInfo_0024_resource
         execution:
           onStart:
-            - request='{"key":"helmgeneric", "rclass":"local", "packageType":"generic", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete helmgeneric --quiet || true
-            - jfrog rt repo-create request.json
             - cd ${res_S_HelmDeploy_GitRepo_0024_resource_resourcePath}/tests/core/helmdeploy
             - jfrog rt u simplehelm/ helmgeneric --flat=false --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_HelmDeploy_BuildInfo_0024_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
-          onFailure:
-            - jfrog rt repo-delete helmgeneric --quiet || true
 
       - name: S_HelmDeploy_0024_deploy
         type: HelmDeploy
@@ -78,5 +72,4 @@ pipelines:
             - chmod +x ./linux-amd64/helm
             - sudo mv ./linux-amd64/helm /usr/local/bin/helm3
           onComplete:
-            - jfrog rt repo-delete helmgeneric --quiet || true
             - helm3 delete simplehelm-generic-$run_id --namespace $K8S_NAMESPACE
