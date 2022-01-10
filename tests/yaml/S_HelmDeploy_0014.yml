@@ -37,14 +37,8 @@ pipelines:
               trigger: false
         execution:
           onExecute:
-            - request='{"key":"simplecharts", "rclass":"local", "packageType":"helm", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete simplecharts --quiet || true
-            - jfrog rt repo-create request.json
             - jfrog rt u ${res_S_HelmDeploy_GitRepo_0014_resource_resourcePath}/tests/core/helmdeploy/simplehelm-0.3.0.tgz "simplecharts/"
             - jfrog rt u ${res_S_HelmDeploy_GitRepo_0014_resource_resourcePath}/tests/core/helmdeploy/index.yaml "simplecharts/"
-          onFailure:
-            - jfrog rt repo-delete simplecharts --quiet
 
       - name: deploy_helm_chart_from_helm_repo
         type: HelmDeploy
@@ -69,5 +63,4 @@ pipelines:
           test: true
         execution:
           onComplete:
-            - jfrog rt repo-delete simplecharts --quiet || true
             - helm3 delete ${release_name_from_helm_repo} --namespace ${k8s_namespace}

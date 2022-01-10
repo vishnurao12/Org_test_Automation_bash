@@ -39,14 +39,8 @@ pipelines:
               trigger: false
         execution:
           onExecute:
-            - request='{"key":"simplecharts", "rclass":"local", "packageType":"helm", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete simplecharts --quiet || true
-            - jfrog rt repo-create request.json
             - jfrog rt u ${res_S_LX_HBGDeploy_5978_0003_git_resource_resourcePath}/tests/core/helmbluegreen/simplehelm-0.3.0.tgz "simplecharts/"
             - jfrog rt u ${res_S_LX_HBGDeploy_5978_0003_git_resource_resourcePath}/tests/core/helmbluegreen/index.yaml "simplecharts/"
-          onFailure:
-            - jfrog rt repo-delete simplecharts --quiet
 
       - name: S_LX_HBGDeploy_5978_0003_2
         type: HelmBlueGreenDeploy
@@ -73,6 +67,5 @@ pipelines:
             - helm3 status ${blue_release_name}
             - kubectl get service ${idle_name}
           onComplete:
-            - jfrog rt repo-delete simplecharts --quiet || true
             - helm3 delete ${blue_release_name} --namespace ${k8s_namespace} || true
             - kubectl delete service ${idle_name} --namespace ${k8s_namespace} || true

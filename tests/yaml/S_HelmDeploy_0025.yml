@@ -38,18 +38,12 @@ pipelines:
             - name: S_HelmDeploy_BuildInfo_0025_resource
         execution:
           onStart:
-            - request='{"key":"simplecharts", "rclass":"local", "packageType":"helm", "description":"This repo is a test repo used by test automation", "repoLayoutRef":"simple-default"}'
-            - echo $request > request.json
-            - jfrog rt repo-delete simplecharts --quiet || true
-            - jfrog rt repo-create request.json
             - cd ${res_S_HelmDeploy_GitRepo_0025_resource_resourcePath}/tests/core/helmdeploy
             - jfrog rt u index.yaml simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt u simplehelm-0.3.0.tgz simplecharts --build-name=$JFROG_CLI_BUILD_NAME --build-number=$JFROG_CLI_BUILD_NUMBER
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_HelmDeploy_BuildInfo_0025_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
-          onFailure:
-            - jfrog rt repo-delete simplecharts --quiet || true
 
       - name: S_HelmDeploy_0025_deploy
         type: HelmDeploy
@@ -74,5 +68,4 @@ pipelines:
           test: true
         execution:
           onComplete:
-            - jfrog rt repo-delete simplecharts --quiet || true
             - helm3 delete simplehelm-from-repo-$run_id --namespace $K8S_NAMESPACE
