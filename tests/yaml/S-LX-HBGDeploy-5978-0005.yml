@@ -52,8 +52,6 @@ pipelines:
             - jfrog rt bce $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - jfrog rt bp $JFROG_CLI_BUILD_NAME $JFROG_CLI_BUILD_NUMBER
             - write_output S_LX_HBGDeploy_5978_0005_BuildInfo_resource buildName=$JFROG_CLI_BUILD_NAME buildNumber=$JFROG_CLI_BUILD_NUMBER
-          onFailure:
-            - jfrog rt repo-delete simplecharts
 
       - name: S_LX_HBGDeploy_5978_0005_2
         type: CreateReleaseBundle
