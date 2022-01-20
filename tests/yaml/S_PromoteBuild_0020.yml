@@ -1,9 +1,12 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
 resources:
   - name: S_PromoteBuild_0020_GitRepo
     type: GitRepo
     configuration:
       gitProvider: s_gitHub
-      path: jfbetapipeorg/Org_test_Automation
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
       branches:
         include: master
 
@@ -56,4 +59,7 @@ pipelines:
           failOnValidate: true
         execution:
           onComplete:
-            - execute_command "jfrog rt delete artifactory-pipe-info/pipeline_S_PromoteBuild_0020/{{gitBranch}} --quiet"
+            - export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_PromoteBuild_0020/{{gitBranch}}/${run_number}/s-S_PromoteBuild_0020_2.json.sig | jq '.[0].path') # SCM pipeline source
+            - if [ "$head_sig_path" == "null" ]; then export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_PromoteBuild_0020/${run_number}/s-S_PromoteBuild_0020_2.json.sig | jq '.[0].path'); fi # Non-SCM pipeline source
+            - if [ "$head_sig_path" == "null" ]; then echo "s-S_PromoteBuild_0020_2.json.sig not found"; return 1; fi
+            - execute_command "jfrog rt delete ${head_sig_path} --quiet"
