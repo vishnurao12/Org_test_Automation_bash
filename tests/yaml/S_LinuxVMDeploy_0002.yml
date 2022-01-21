@@ -29,7 +29,7 @@ pipelines:
             - jfrog rt upload LinuxVMDeploy_fileSpec.txt test-automation-generic-local
       # Check that deploy artifacts are uploaded to non-default dir.
       - name: S_LinuxVMDeploy_0002_2
-        type: jfrog_dev/LinuxVMDeploy
+        type: LinuxVMDeploy
         configuration:
           environmentVariables:
             dry_run: "false"

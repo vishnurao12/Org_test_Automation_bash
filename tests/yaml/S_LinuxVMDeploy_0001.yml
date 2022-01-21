@@ -29,7 +29,7 @@ pipelines:
             - jfrog rt upload LinuxVMDeploy_fileSpec.txt test-automation-generic-local
       # Check that deploy command runs and FileSpec is uploaded to default dir.
       - name: S_LinuxVMDeploy_0001_2
-        type: jfrog_dev/LinuxVMDeploy
+        type: LinuxVMDeploy
         configuration:
           integrations:
             - name: s_VM_DEPLOY
