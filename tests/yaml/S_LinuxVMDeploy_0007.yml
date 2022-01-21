@@ -51,7 +51,7 @@ pipelines:
             - name: LinuxVMDeploy_releaseBundle
 
       - name: S_LinuxVMDeploy_0007_3
-        type: jfrog_dev/LinuxVMDeploy
+        type: LinuxVMDeploy
         configuration:
           integrations:
             - name: s_VM_DEPLOY

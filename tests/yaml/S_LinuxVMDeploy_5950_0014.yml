@@ -27,7 +27,7 @@ pipelines:
             - echo "File spec ${run_id}" > LinuxVMDeploy_fileSpec.txt
             - jfrog rt upload LinuxVMDeploy_fileSpec.txt test-automation-generic-local
       - name: S_LinuxVMDeploy_5950_0014_2
-        type: jfrog_dev/LinuxVMDeploy
+        type: LinuxVMDeploy
         configuration:
           integrations:
             - name: s_VM_DEPLOY

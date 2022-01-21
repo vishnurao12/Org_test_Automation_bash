@@ -30,7 +30,7 @@ pipelines:
             - jfrog rt upload LinuxVMDeploy_buildInfo.txt test-automation-generic-local --build-name=LinuxVMDeploy_buildInfo --build-number=1
             - jfrog rt build-publish LinuxVMDeploy_buildInfo 1
       - name: S_LinuxVMDeploy_0005_2
-        type: jfrog_dev/LinuxVMDeploy
+        type: LinuxVMDeploy
         configuration:
           integrations:
             - name: s_VM_DEPLOY
