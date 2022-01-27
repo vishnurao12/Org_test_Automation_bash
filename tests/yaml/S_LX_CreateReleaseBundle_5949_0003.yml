@@ -97,7 +97,10 @@ pipelines:
         execution:
           onExecute:
             # create an invalid signature file
-            - export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_LX_CreateReleaseBundle_5949_0003/{{gitBranch}}/${run_number}/s-S_LX_CreateReleaseBundle_5949_0003_4.json.sig | jq '.[0].path')
+            - export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_LX_CreateReleaseBundle_5949_0003/{{gitBranch}}/${run_number}/s-S_LX_CreateReleaseBundle_5949_0003_4.json.sig | jq '.[0].path') # SCM pipeline source
+            - if [ "$head_sig_path" == "null" ]; then export head_sig_path=$(jfrog rt s artifactory-pipe-info/pipeline_S_LX_CreateReleaseBundle_5949_0003/${run_number}/s-S_LX_CreateReleaseBundle_5949_0003_4.json.sig | jq '.[0].path'); fi # Non-SCM pipeline source
+            - if [ "$head_sig_path" == "null" ]; then echo "s-S_LX_CreateReleaseBundle_5949_0002_2.json.sig not found"; return 1; fi
+            - add_run_variables head_sig_path="${head_sig_path}"
             - execute_command "jfrog rt u $res_S_LX_CreateReleaseBundle_5949_0003_GitRepo_resourcePath/tests/artifacts/invalidGPGSig $head_sig_path --quiet"
       - name: S_LX_CreateReleaseBundle_5949_0003_7
         type: CreateReleaseBundle
