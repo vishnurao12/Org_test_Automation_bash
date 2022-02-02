@@ -1,0 +1,30 @@
+
+pipelines:
+  - name: pipelines_S_B_Jen_6485_002
+    steps:
+      - name: S_B_Jen_6485_002_1
+        type: Bash
+        execution:
+          onExecute:
+            - add_run_variables myVariable=${run_id}
+
+      - name: S_B_Jen_6485_002_2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_B_Jen_6485_002_1
+        execution:
+          onExecute:
+            - add_run_variables myVariable=${step_name}
+
+      - name: S_B_Jen_6485_002_jenkins
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testPipeline
+          buildParameters:
+            run1: ${myVariable}
+          integrations:
+            - name: S_B_Jenkins
+          inputSteps:
+            - name: S_B_Jen_6485_002_2
+            - name: S_B_Jen_6485_002_1

@@ -1,0 +1,28 @@
+resources:
+  - name: S_B_Jen_6485_001_resource
+    type: PropertyBag
+    configuration:
+      key: value
+
+pipelines:
+  - name: pipelines_S_B_Jen_6485_001
+    steps:
+      - name: S_B_Jen_6485_001_bash
+        type: Bash
+        configuration:
+          outputResources:
+            - name : S_B_Jen_6485_001_resource
+        execution:
+          onExecute:
+            - add_run_variables myVariable=${run_id}
+
+      - name: S_B_Jen_6485_001_jenkins
+        type: Jenkins
+        configuration:
+          jenkinsJobName: testPipeline
+          buildParameters:
+            run1: ${myVariable}
+          integrations:
+            - name: S_B_Jenkins
+          inputResources:
+            - name : S_B_Jen_6485_001_resource
