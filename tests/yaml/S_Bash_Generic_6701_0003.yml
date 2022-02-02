@@ -1,0 +1,34 @@
+resources:
+  - name: S_Bash_Generic_6701_0003_propertyBag_1
+    type: PropertyBag
+    configuration:
+      runNumber: 0
+  - name: S_Bash_Generic_6701_0003_propertyBag_2
+    type: PropertyBag
+    configuration:
+      runNumber: 0
+
+pipelines:
+  - name: S_Bash_Generic_6701_0003_1
+    steps:
+      - name: S_Bash_Generic_6701_0003_1_1
+        type: Bash
+        configuration:
+          outputResources:
+            - name: S_Bash_Generic_6701_0003_propertyBag_1
+          inputResources:
+            - name: S_Bash_Generic_6701_0003_propertyBag_2
+        execution:
+          onExecute:
+            - echo 'hello'
+  - name: S_Bash_Generic_6701_0003_2
+    steps:
+      - name: S_Bash_Generic_6701_0003_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: S_Bash_Generic_6701_0003_propertyBag_1
+            - name: S_Bash_Generic_6701_0003_propertyBag_2
+        execution:
+          onExecute:
+            - echo 'hello'
