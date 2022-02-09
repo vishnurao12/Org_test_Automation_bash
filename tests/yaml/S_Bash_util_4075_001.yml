@@ -17,7 +17,7 @@ pipelines:
         execution:
           onExecute:
             - "steps=$(curl -sS -H \"Authorization: Bearer $builder_api_token\" -H 'Content-Type: application/json' \"${pipelines_api_url}/steps?runIds=${run_id}&names=S_Bash_util_4075_001_1\")"
-            - stepId=$(echo $steps | jq -r '.[0].stepId')
+            - stepId=$(echo $steps | jq -r '.[0].id')
             - if [ -z "$stepId" ] || [ "$stepId" == "null" ]; then return 1; fi
             - "stepTestReports=$(curl -sS -H \"Authorization: Bearer $builder_api_token\" -H 'Content-Type: application/json' \"${pipelines_api_url}/stepTestReports?stepIds=${stepId}\")"
             - durationSeconds=$(echo $stepTestReports | jq -r '.[0].durationSeconds')
