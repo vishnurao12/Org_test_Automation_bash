@@ -1,0 +1,64 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: S_HelmDeploy_7602_0004_GitRepo
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+      branches:
+        include: master
+
+  - name: S_HelmDeploy_7602_0004_HelmChart
+    type: HelmChart
+    configuration:
+      sourceArtifactory: s_artifactory
+      repository: test-automation-helm-local
+      version: version
+      chart: simplehelm
+
+
+pipelines:
+  - name: S_HelmDeploy_7602_0004
+    configuration:
+      environmentVariables:
+        readOnly:
+          RELEASE_NAME: "s-helmdeploy-7602-0004-${run_id}"
+          k8s_namespace: "pipe-master-pool"
+          JFROG_CLI_BUILD_NUMBER: ${run_id}
+    steps:
+      - name: S_HelmDeploy_7602_0004_1
+        type: HelmPublish
+        configuration:
+          chartPath: "./tests/core/helmdeploy/simplehelm"
+          helmVersion: 3
+          inputResources:
+            - name: S_HelmDeploy_7602_0004_GitRepo
+          outputResources:
+            - name: S_HelmDeploy_7602_0004_HelmChart
+          integrations:
+            - name: s_artifactory
+      - name: S_HelmDeploy_7602_0004_2
+        type: HelmDeploy
+        configuration:
+          inputResources:
+            - name: S_HelmDeploy_7602_0004_HelmChart
+            - name: S_HelmDeploy_7602_0004_GitRepo
+          integrations:
+            - name: s_artifactory
+            - name: s_kubernetes
+          chartVersion: 0.3.0
+          chartPath: ./
+          helmVersion: 3
+          releaseName: ${RELEASE_NAME}
+          flags: "--wait --timeout 120s -n ${k8s_namespace}"
+          valueFilePaths:
+            - ${res_S_HelmDeploy_7602_0004_GitRepo_resourcePath}/tests/core/helmdeploy/simplehelm/values.yaml
+          lint: true
+          lintFlags: "--strict"
+          test: true
+          testFlags: "-n ${k8s_namespace}"
+        execution:
+          onComplete:
+            - helm3 delete ${RELEASE_NAME} --namespace ${k8s_namespace}
