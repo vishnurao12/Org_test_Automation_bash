@@ -1,0 +1,34 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: S_HelmDeploy_7602_0002_HelmChart_1
+    type: HelmChart
+    configuration:
+      sourceArtifactory: s_artifactory
+      repository: simplecharts
+      chart: simplehelm
+      version: 0.0.0
+  - name: S_HelmDeploy_7602_0002_HelmChart_2
+    type: HelmChart
+    configuration:
+      sourceArtifactory: s_artifactory
+      repository: simplecharts
+      chart: simplehelm
+      version: 0.0.0
+
+pipelines:
+  - name: S_HelmDeploy_7602_0002
+    steps:
+      - name: S_HelmDeploy_7602_0002_1
+        type: HelmDeploy
+        configuration:
+          chartPath: ./
+          helmVersion: 3
+          releaseName: release
+          integrations:
+            - name: s_artifactory
+            - name: s_kubernetes
+          inputResources:
+            - name: S_HelmDeploy_7602_0002_HelmChart_1
+            - name: S_HelmDeploy_7602_0002_HelmChart_1
