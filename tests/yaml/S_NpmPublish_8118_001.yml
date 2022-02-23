@@ -31,6 +31,8 @@ pipelines:
           integrations:
             - name: s_artifactory
         execution:
+          onStart:
+            - replace_envs ${res_S_NpmPublish_8118_001_GitRepo_resourcePath}/tests/npm/package.json
           onSuccess:
             - restore_run_files $S_NpmPublish_8118_001_1_sourceStateName S_NpmPublish_8118_001_1.tar.gz
             - if [ -d S_NpmPublish_8118_001_1.tar.gz ]; then echo "Source state is already uncompressed.  Wrong buildplane?"; return 1; fi

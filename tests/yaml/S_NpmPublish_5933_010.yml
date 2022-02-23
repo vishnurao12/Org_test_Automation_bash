@@ -32,6 +32,9 @@ pipelines:
             - name: S_NpmPublish_5933_010_GitRepo
           integrations:
             - name: s_artifactory
+        execution:
+          onStart:
+            - replace_envs ${res_S_NpmPublish_5933_010_GitRepo_resourcePath}/tests/npm/package.json
       - name: S_NpmPublish_5933_010_2
         type: NpmPublish
         configuration:
