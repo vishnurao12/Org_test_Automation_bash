@@ -30,6 +30,7 @@ pipelines:
         execution:
           onExecute:
             - cd $(find_resource_variable S_NpmBuild_5933_007_GitRepo resourcePath)/tests/npm
+            - replace_envs package.json
             - jfrog rt upload package.json test-automation-generic-local/package.json
             - write_output S_NpmBuild_5933_007_FileSpec pattern="test-automation-generic-local/package.json"
 

@@ -29,6 +29,9 @@ pipelines:
             - name: s_artifactory
           inputResources:
             - name: S_NpmPublish_6679_001_GitRepo
+        execution:
+          onStart:
+            - replace_envs ${res_S_NpmPublish_6679_001_GitRepo_resourcePath}/tests/npm/package.json
       - name: S_NpmPublish_6679_001_2
         type: NpmPublish
         execution:

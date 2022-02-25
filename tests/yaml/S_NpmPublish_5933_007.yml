@@ -22,6 +22,9 @@ pipelines:
             - name: s_artifactory
           sourceLocation: "tests/npm"
           repositoryName: test-automation-npm-remote
+        execution:
+          onStart:
+            - replace_envs ${res_S_NpmPublish_5933_007_GitRepo_resourcePath}/tests/npm/package.json
       - name: S_NpmPublish_5933_007_2
         type: NpmPublish
         configuration:
