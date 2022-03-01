@@ -1,0 +1,56 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: P_Sync_8190_001_GitRepo
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+
+  - name: P_Sync_8190_001_GitRepo_1
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+
+  - name: P_Sync_8190_001_GitRepo_2
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+
+  - name: P_Sync_8190_001_GitRepo_bash
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
+
+  - name: P_Sync_8190_001_GitRepo_bash_1
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
+
+  - name: P_Sync_8190_001_GitRepo_bash_2
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation_bash.path }}
+
+pipelines:
+  - name: P_Sync_8190_001
+    steps:
+      - name: P_Sync_8190_001_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: P_Sync_8190_001_GitRepo
+            - name: P_Sync_8190_001_GitRepo_1
+            - name: P_Sync_8190_001_GitRepo_2
+            - name: P_Sync_8190_001_GitRepo_bash
+            - name: P_Sync_8190_001_GitRepo_bash_1
+            - name: P_Sync_8190_001_GitRepo_bash_2
+        execution:
+          onExecute:
+            - echo "hello"
