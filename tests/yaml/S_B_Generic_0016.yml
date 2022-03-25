@@ -1,0 +1,30 @@
+pipelines:
+  - name: S_B_Generic_0016_pipe
+    steps:
+      - name: S_B_Generic_0016_step
+        type: Bash
+        configuration:
+          timeoutSeconds: 1000
+        execution:
+          onExecute:
+            - if [ "$step_timeout_seconds" != "1000" ]; then exit 1; fi
+            - if [ "$step_name" != "S_Bash_8033_01_step" ]; then exit 1; fi
+            - if [ -z "$step_id" ]; then exit 1; fi
+            - if [ -z "$project_name" ]; then exit 1; fi
+            - if [ -z "$project_id" ]; then exit 1; fi
+            - if [ -z "$project_key" ]; then exit 1; fi
+            - if [ -z "$shared_workspace" ]; then exit 1; fi
+            - if [ "$step_affinity_group" != "S_Bash_8033_01_step" ]; then exit 1; fi
+            - if [ "$step_type" != "Bash" ]; then exit 1; fi
+            - if [ -z "$step_url" ]; then exit 1; fi
+            - if [ -z "$run_created_at" ]; then exit 1; fi
+            - if [ -z "$run_id" ]; then exit 1; fi
+            - if [ -z "$run_number" ]; then exit 1; fi
+            - if [ "$pipeline_name" != "S_Bash_8033_01_pipe" ]; then exit 1; fi
+            - if [ -z "$step_json_path" ]; then exit 1; fi
+            - if [ -z "$step_build_plane_version" ]; then exit 1; fi
+            - if [ -z "$step_dependency_state_dir" ]; then exit 1; fi
+            - if [ -z "$step_docker_container_name" ]; then exit 1; fi
+            - if [ -z "$step_tmp_dir" ]; then exit 1; fi
+            - if [ -z "$steplet_id" ]; then exit 1; fi
+            - if [ -z "$steplet_number" ]; then exit 1; fi
