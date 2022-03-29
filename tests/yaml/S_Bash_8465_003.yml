@@ -1,0 +1,9 @@
+pipelines:
+  - name: pipelines_S_Bash_8465_003
+    steps:
+      - name: S_Bash_8465_003
+        type: Bash
+        execution:
+          onExecute:
+            - sleep 10
+            - exit 1

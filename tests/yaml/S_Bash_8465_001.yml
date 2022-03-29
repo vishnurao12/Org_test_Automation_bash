@@ -1,0 +1,26 @@
+pipelines:
+  - name: pipelines_S_Bash_8465_001
+    steps:
+      - name: S_Bash_8465_001
+        type: Bash
+        execution:
+          onExecute:
+            - sleep 10
+            - "step_info=$(curl -sS -H \"Authorization: Bearer $builder_api_token\" -H 'Content-Type: application/json' ${pipelines_api_url}/steps/${step_id})"
+            - "firstHeartbeatAt=$(echo \"$step_info\" | jq -r '.lastHeartbeatAt[0:19]')Z"
+            - echo $firstHeartbeatAt
+            - "firstHeartbeatAtMs=$(echo [\\\"$firstHeartbeatAt\\\"] | jq -r '.[0] | fromdateiso8601')"
+            - echo $firstHeartbeatAtMs
+            - sleep 70
+            - "step_info=$(curl -sS -H \"Authorization: Bearer $builder_api_token\" -H 'Content-Type: application/json' ${pipelines_api_url}/steps/${step_id})"
+            - "secondHeartbeatAt=$(echo \"$step_info\" | jq -r '.lastHeartbeatAt[0:19]')Z"
+            - echo $secondHeartbeatAt
+            - "secondHeartbeatAtMs=$(echo [\\\"$secondHeartbeatAt\\\"] | jq -r '.[0] | fromdateiso8601')"
+            - echo $secondHeartbeatAtMs
+            - |
+              if [[ "$secondHeartbeatAtMs" -gt "$firstHeartbeatAtMs" ]]; then
+                  echo "success"
+              else
+                  echo "failure"
+                  exit 1
+              fi
