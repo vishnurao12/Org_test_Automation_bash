@@ -1,0 +1,13 @@
+pipelines:
+  - name: Pipelines_S_Matrix_0016
+    steps:
+      - name: S_Matrix_0016
+        type: Matrix
+        stepMode: Bash
+        stepletMultipliers:
+          environmentVariables:
+            - env1: 
+            - env2: 
+        execution:
+          onExecute:
+            - echo "Hello world"
