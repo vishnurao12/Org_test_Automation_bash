@@ -8,8 +8,8 @@ pipelines:
           environmentVariables:
             - animal: dog
               bird: sparrow
-           - animal: cat
-             bird: crow 
+            - animal: cat
+              bird: crow 
           runtimes:
             - type: image
               image:
