@@ -6,8 +6,7 @@ pipelines:
         stepMode: Bash
         stepletMultipliers:
           environmentVariables:
-            - env1: 
-            - env2: 
+
         execution:
           onExecute:
             - echo "Hello world"
