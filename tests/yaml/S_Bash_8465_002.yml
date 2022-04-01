@@ -1,0 +1,18 @@
+pipelines:
+  - name: pipelines_S_Bash_8465_002
+    steps:
+      - name: S_Bash_8465_002
+        type: Bash
+        execution:
+          onExecute:
+            - sleep 10
+            - "step_info=$(curl -sS -H \"Authorization: Bearer $builder_api_token\" -H 'Content-Type: application/json' ${pipelines_api_url}/steps/${step_id})"
+            - "heartbeatAt=$(echo \"$step_info\" | jq -r '.lastHeartbeatAt')"
+            - echo $heartbeatAt
+            - |
+              if [[ "$heartbeatAt" != "null" ]]; then
+                  echo "success"
+              else
+                  echo "failure"
+                  exit 1
+              fi
